@@ -1,9 +1,10 @@
 <div class="row">
-  <div class="column">
-    <p><%= link "← go back", to: "/" %></p>
-    <h2>Palindrome</h2>
+    <div class="column">
+        <p><%= link "← go back", to: "/" %></p>
+        <h2>Palindrome</h2>
 
-    <p><%= @word %> => <%= @pal %></p>
-  </div>
+        <p id="palindrome"><%= @word %></p>
+        <%= @pal %>
+    </div>
 </div>
 

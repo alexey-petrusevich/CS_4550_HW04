@@ -25,11 +25,17 @@ defmodule Practice.Calc do
 
   def factor(number) do
     # TODO: complete
+    n = :math.sqrt(number)
+    # .. do stuff here
     [1, 2, 3]
   end
 
   def palindrome(word) do
-    # TODO: complete
-    word
+    if String.reverse(word) == word do
+      "is a palindrome!"
+    else
+      "is not a palindrome!"
+    end
   end
+
 end
