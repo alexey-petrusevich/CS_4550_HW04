@@ -7,6 +7,7 @@ defmodule Practice.Calc do
   def calc(expr) do
     # This should handle +,-,*,/ with order of operations,
     # but doesn't need to handle parens.
+    # TODO: implement evaluation of expression
     expr
     |> String.split(~r/\s+/)
     |> hd
@@ -20,5 +21,15 @@ defmodule Practice.Calc do
     # |> convert to postfix
     # |> reverse to prefix
     # |> evaluate as a stack calculator using pattern matching
+  end
+
+  def factor(number) do
+    # TODO: complete
+    [1, 2, 3]
+  end
+
+  def palindrome(word) do
+    # TODO: complete
+    word
   end
 end
