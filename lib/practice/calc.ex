@@ -59,9 +59,9 @@ defmodule Practice.Calc do
     || value == "/"
   end
 
+  # TODO: finish
   defp convertPostfixHelper(list, stack) do
     if (length(list) > 0) do
-      # TODO: finish
       tag = list
             |> hd
             |> elem(0)
@@ -84,7 +84,7 @@ defmodule Practice.Calc do
           [{tag, top} | convertPostfixHelper(tl(list), [value | stack])]
         end
 
-        [{tag, rator} | convertPostfixHelper(tl(list), tl(stack))]
+        [{tag, value} | convertPostfixHelper(tl(list), tl(stack))]
       end
     else
       list
@@ -104,11 +104,12 @@ defmodule Practice.Calc do
     Enum.reverse(list)
   end
 
+  # TODO: finish
   defp eval(stack) do
   end
 
 
-
+  # does not take into account operator precedence
   defp evaluate(stack) do
     result = 0
     if (length(stack) >= 3) do
