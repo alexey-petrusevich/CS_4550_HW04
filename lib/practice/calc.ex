@@ -5,10 +5,55 @@ defmodule Practice.Calc do
   end
 
   def calc(expr) do
+    #expr
+    #|> String.split(~r/\s+/)
+    #|> evaluate
+
     expr
     |> String.split(~r/\s+/)
-    |> evaluate
+    |> tagTokens
+    |> convertPostfix
+    |> reversePrefix
+    |> eval
+
+    # Hint:
+    # expr
+    # |> split
+    # |> tag_tokens  (e.g. [+, 1] => [{:op, "+"}, {:num, 1.0}]
+    # |> convert to postfix
+    # |> reverse to prefix
+    # |> evaluate as a stack calculator using pattern matching
+
   end
+
+  defp tagTokens(list) do
+    if (length(list) > 0) do
+      value = hd(list)
+      tag = value |> getTag
+
+      if (tag == :num), do: value = parse_float(value)
+      [{tag, value}] ++ tag_tokens(tl(list))
+    else
+      []
+    end
+  end
+
+  defp getTag(value) do
+    case value do
+      o when o in ["+", "-", "*", "/"] -> :op
+      _ -> :num
+    end
+  end
+
+  defp convertPostfix(list) do
+  end
+
+  defp reversePrefix(list) do
+  end
+
+  defp eval(stack) do
+  end
+
 
 
   defp evaluate(stack) do
