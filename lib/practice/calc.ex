@@ -23,11 +23,30 @@ defmodule Practice.Calc do
     # |> evaluate as a stack calculator using pattern matching
   end
 
+  # idea for getPrimes() was taken from here:
+  # https://www.geeksforgeeks.org/print-all-prime-factors-of-a-given-number/
   def factor(number) do
-    # TODO: complete
-    n = :math.sqrt(number)
-    # .. do stuff here
-    [1, 2, 3]
+    getPrimes(number, [])
+  end
+
+  def getPrimes(number, factors) do
+    if (rem(number, 2) == 0) do
+      getPrimes(div(number, 2), [2 | factors])
+    else
+      doOddPrimes(number, factors, 3)
+    end
+  end
+
+  def doOddPrimes(number, factors, i) do
+    if (i <= :math.sqrt(number)) do
+      if (rem(number, i) == 0) do
+        doOddPrimes(div(number, i), [i | factors], i)
+      else
+        doOddPrimes(number, factors, i + 2)
+      end
+    else
+      [number | factors]
+    end
   end
 
   def palindrome(word) do
