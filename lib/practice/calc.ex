@@ -33,7 +33,7 @@ defmodule Practice.Calc do
             |> getTag
 
       if (tag == :num), do: value = parse_float(value)
-      [{tag, value}] ++ tag_tokens(tl(list))
+      [{tag, value}] ++ tagTokens(tl(list))
     else
       []
     end
