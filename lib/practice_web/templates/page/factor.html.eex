@@ -3,7 +3,7 @@
     <p><%= link "← go back", to: "/" %></p>
     <h2>Factors</h2>
 
-    <p>Factors of <%= @number %> : <%= @factors %></p>
+    <p>Factors of <%= @x %> : <%= @factors %></p>
   </div>
 </div>
 

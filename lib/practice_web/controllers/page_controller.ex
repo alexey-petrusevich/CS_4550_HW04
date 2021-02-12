@@ -16,10 +16,11 @@ defmodule PracticeWeb.PageController do
     render conn, "calc.html", expr: expr, y: y
   end
 
-  def factor(conn, %{"number" => number}) do
-    {number, _} = Integer.parse(number)
-    factors = Practice.factor(number)
-    render conn, "factor.html", number: number, factors: factors
+  def factor(conn, %{"x" => x}) do
+    {x, _} = Integer.parse(x)
+    factors = Practice.factor(x)
+              |> inspect(charlists: :as_lists)
+    render conn, "factor.html", x: x, factors: factors
   end
 
 
