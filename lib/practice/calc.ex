@@ -27,6 +27,7 @@ defmodule Practice.Calc do
   # https://www.geeksforgeeks.org/print-all-prime-factors-of-a-given-number/
   def factor(number) do
     getPrimes(number, [])
+    |> inspect(charlists: :as_lists)
   end
 
   def getPrimes(number, factors) do
