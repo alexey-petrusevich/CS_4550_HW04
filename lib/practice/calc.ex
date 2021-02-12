@@ -29,7 +29,8 @@ defmodule Practice.Calc do
   defp tagTokens(list) do
     if (length(list) > 0) do
       value = hd(list)
-      tag = value |> getTag
+      tag = value
+            |> getTag
 
       if (tag == :num), do: value = parse_float(value)
       [{tag, value}] ++ tag_tokens(tl(list))
@@ -45,10 +46,32 @@ defmodule Practice.Calc do
     end
   end
 
+  # credit to: https://www.geeksforgeeks.org/convert-infix-prefix-notation/
   defp convertPostfix(list) do
+    # TODO: finish
+    tag = list
+          |> hd
+          |> elem(0)
+    value = list
+            |> hd
+            |> elem(1)
+    if (tag == :num) do
+      [{tag, value} | convertPostfix(tl(list))]
+    else
+      [{tag, value} | convertPostfix(tl(list))]
+    end
+  end
+
+  defp getPriority(rator) do
+    if (rator == "+" || rator == "-") do
+      1
+    else
+      2
+    end
   end
 
   defp reversePrefix(list) do
+
   end
 
   defp eval(stack) do
