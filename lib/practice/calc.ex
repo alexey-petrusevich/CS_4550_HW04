@@ -5,16 +5,16 @@ defmodule Practice.Calc do
   end
 
   def calc(expr) do
-    #expr
-    #|> String.split(~r/\s+/)
-    #|> evaluate
-
     expr
     |> String.split(~r/\s+/)
-    |> tagTokens
-    |> convertPostfix
-    |> reversePrefix
-    |> eval
+    |> evaluate
+
+    #expr
+    #|> String.split(~r/\s+/)
+    #|> tagTokens
+    #|> convertPostfix
+    #|> reversePrefix
+    #|> eval
 
     # Hint:
     # expr
@@ -48,30 +48,60 @@ defmodule Practice.Calc do
 
   # credit to: https://www.geeksforgeeks.org/convert-infix-prefix-notation/
   defp convertPostfix(list) do
-    # TODO: finish
-    tag = list
-          |> hd
-          |> elem(0)
-    value = list
+    # '@' here is a placeholder for the bottom of the stack
+    convertPostfixHelper(list, ["@"])
+  end
+
+  defp isOperator(value) do
+    value == "+"
+    || value == "-"
+    || value == "*"
+    || value == "/"
+  end
+
+  defp convertPostfixHelper(list, stack) do
+    if (length(list) > 0) do
+      # TODO: finish
+      tag = list
             |> hd
-            |> elem(1)
-    if (tag == :num) do
-      [{tag, value} | convertPostfix(tl(list))]
+            |> elem(0)
+      value = list
+              |> hd
+              |> elem(1)
+      if (tag == :num) do
+        [{tag, value} | convertPostfixHelper(tl(list), stack)]
+      else # operator
+        # TODO: handle operator case
+
+        top = hd(stack)
+        if (isOperator(top)) do
+          if (getPriority(value) < getPriority(top)) do
+            [{tag, top} | convertPostfixHelper(tl(list), tl(stack))]
+          else
+          end
+        else
+        # else not an operator (bottom of the stack) - push onto stack
+          [{tag, top} | convertPostfixHelper(tl(list), [value | stack])]
+        end
+
+        [{tag, rator} | convertPostfixHelper(tl(list), tl(stack))]
+      end
     else
-      [{tag, value} | convertPostfix(tl(list))]
+      list
     end
+
   end
 
+  # done
   defp getPriority(rator) do
-    if (rator == "+" || rator == "-") do
-      1
-    else
-      2
-    end
+    if (rator == "*" || rator == "/"), do: 2
+    if (rator == "+" || rator == "-"), do: 1
+    0
   end
 
+  # done
   defp reversePrefix(list) do
-
+    Enum.reverse(list)
   end
 
   defp eval(stack) do
